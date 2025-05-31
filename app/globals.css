@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-cream-50 text-brown-500;
+    background-image: 
+      radial-gradient(circle at 100% 100%, rgba(204, 223, 208, 0.2) 0%, transparent 50%),
+      radial-gradient(circle at 0% 0%, rgba(170, 204, 177, 0.1) 0%, transparent 50%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-forest-600;
+  }
+
+  /* Better button focus styles */
+  button:focus-visible {
+    @apply outline-2 outline-forest-400 outline-offset-2;
+  }
+}
+
+@layer components {
+  .prose {
+    @apply max-w-none;
+  }
+
+  .prose p {
+    @apply leading-relaxed text-brown-400;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-[1.01];
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-gradient-soft {
+    @apply bg-gradient-to-b from-cream-50 via-sage-50 to-cream-100;
+  }
+} 
