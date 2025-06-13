@@ -1,0 +1,86 @@
+Landing Page Redesign (2024-03-21)
+-------------------------
+WHAT WAS CHANGED:
+- Completely redesigned the landing page (/) with multiple sections
+- Created new components:
+  * MoodCalendar.tsx: Visual year view of moods
+  * FeatureCard.tsx: Reusable feature highlight component
+  * FeatherMascot.tsx: Animated mascot component
+  * AuthenticatedContent.tsx: Client component for auth-dependent UI
+  * MarketingContent.tsx: Client component for marketing sections
+- Updated main page layout with:
+  * Hero section with clear value proposition
+  * Features section with 4 key benefits
+  * Mood calendar visualization
+  * Design philosophy section
+  * Multiple call-to-action points
+- Enhanced design:
+  * Added paper texture background
+  * Introduced cream and parchment color palette
+  * Added feather character mascot with blinking animation
+  * More bookish styling with quotes and borders
+  * Reduced green intensity for better balance
+- Improved authentication flow:
+  * Split components into server and client parts
+  * Added conditional rendering based on auth state
+  * Show "Go to Journal" button for authenticated users
+  * Hide marketing sections when user is logged in
+  * Added UserButton for account management
+  * Fixed sign-in/sign-up modal issues
+
+WHY IT WAS CHANGED:
+- To provide a more comprehensive introduction to the app
+- To showcase the app's key features and design philosophy
+- To improve user understanding and conversion
+- To establish a strong visual identity
+- To create a more book-like, warm, and inviting atmosphere
+- To incorporate the app's mascot for personality
+- To fix authentication UX issues and provide better user flow
+- To properly handle server/client component architecture
+
+WHAT PART OF THE APP IT AFFECTS:
+- Public landing page (/)
+- New component structure
+- User acquisition flow
+- Brand positioning and messaging
+- Visual identity and mascot integration
+- Authentication and user experience
+- Application architecture
+
+Next Steps:
+- Implement actual mood tracking functionality
+- Create journal entry interface
+- Set up database integration
+- Add user settings and preferences
+- Consider adding more mascot interactions
+- Explore paper texture variations for different sections
+- Add loading states for authentication
+- Implement proper error handling for auth edge cases
+- Consider adding more interactive elements to client components
+- Optimize component re-renders
+
+[Image Assets Fix - Current Date]
+- What was changed: Added lamp.png and plant.png to public/assets directory
+- Why it was changed: Images were not loading because they were missing from the public assets folder
+- What part of the app it affects: Journal entry creation and viewing pages where decorative lamp and plant images are displayed 
+
+Album Creation Feature (March 21, 2024)
+------------------------------------
+What was changed:
+- Added album creation functionality to the "Your Writing Journey" shelf
+- Created new database tables for albums and album entries
+- Added album creation modal with title, description, and color picker
+- Created album book spines that display on the shelf
+- Added album detail page to view entries within an album
+
+Why it was changed:
+- To allow users to organize their journal entries into themed collections
+- To provide a more structured way to group related entries
+- To enhance the visual bookshelf metaphor with custom albums
+
+What part of the app it affects:
+- Database schema (new tables: albums, album_entries)
+- Journal page (Your Writing Journey shelf)
+- New album creation modal
+- Album detail page
+- Supabase types and queries 

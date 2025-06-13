@@ -1,0 +1,58 @@
+# Project Roadmap and Changes
+
+## 2024-03-21
+- Created initial README.md with comprehensive tech stack documentation
+  - Why: To establish and lock in core technical decisions
+  - Affects: Entire project architecture and design system
+
+- Fixed dependency version conflicts
+  - Why: React and Next.js versions were incompatible
+  - What: Updated to React 18.2.0 and Next.js 14.1.3
+  - Affects: Core framework dependencies
+
+- Updated Mood Input System
+  - Why: Create a more intuitive and expressive mood selection experience
+  - What: Implemented continuous color slider for mood selection
+  - Affects: Journal entry creation flow and mood tracking
+  - Changes:
+    - Replaced discrete color buttons with smooth color slider
+    - Added interactive draggable handle for color selection
+    - Maintained free text input for mood words
+    - Colors use HSL for smooth transitions (0-360 degrees)
+    - Added visual feedback with shadows and transitions
+
+- Enhanced Mood Input with Previous Selections
+  - Why: Improve consistency and user experience in mood tracking
+  - What: Added quick-select buttons for previously used moods
+  - Affects: New entry creation flow
+  - Changes:
+    - Fetches unique mood-color combinations from user's history
+    - Displays as clickable buttons with color dots
+    - Maintains existing color slider for new selections
+
+- Redesigned New Entry Page with Cozy Desk Scene
+  - Why: Create an immersive, cozy writing environment
+  - What: Complete visual overhaul with realistic 3D desk setup
+  - Affects: New journal entry creation experience
+  - Changes:
+    - Implemented 3-point lighting system (key, fill, rim lights)
+    - Created realistic wood desk with proper perspective and shadows
+    - Enlarged decorative elements: lamp (400x450px), plant (350x400px), feather character (140x140px)
+    - Added animated lamp glow and character blinking
+    - Improved paper texture and 3D rotation effects
+    - Enhanced color scheme with warm amber lighting
+
+### Tech Decisions Locked:
+1. Authentication: Clerk
+2. Backend: Supabase (Database & Storage)
+3. Deployment: Vercel
+4. Typography: EB Garamond (primary) & Inter/Karla (UI)
+5. Color Scheme: Cream & Brown base with soft accents
+6. Design Language: Cozy illustration style with warm lighting
+
+### Next Steps:
+- [ ] Set up initial project structure
+- [ ] Configure Clerk authentication
+- [ ] Initialize Supabase project
+- [ ] Create basic design system
+- [ ] Implement core journal entry functionality 

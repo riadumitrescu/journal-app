@@ -8,32 +8,45 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'cream': {
-          50: '#fff8f0',
-          100: '#ffefd5',
-          200: '#ffecd1',
+        cream: {
+          50: '#FFFDF7',
+          100: '#FFF9E9',
+          200: '#FFF3D6',
+          300: '#FFE9B8',
+          400: '#FFDB8A',
+          500: '#FFD066',
         },
-        'brown': {
-          300: '#8b7355',
-          400: '#6b5d52',
-          500: '#4a3f35',
+        parchment: {
+          50: '#FFFBF0',
+          100: '#FFF7E6',
+          200: '#FFF0CC',
+          300: '#FFE4B3',
+          400: '#FFD999',
+          500: '#FFCC80',
         },
-        'sage': {
-          50: '#f2f5f3',
-          100: '#e4eae6',
-          200: '#c5d4cc',
-          300: '#97ab9f',
-          400: '#5f7267',
-          500: '#465b4e',
-          600: '#374a3e',
+        leather: {
+          50: '#F5F0E5',
+          100: '#E6D5B8',
+          200: '#D4B78C',
+          300: '#C19B66',
+          400: '#A67B44',
+          500: '#8C5E2E',
+          600: '#724C25',
+          700: '#593B1D',
+          800: '#412B15',
+          900: '#2C1D0E',
         },
-        'forest': {
-          100: '#e8efe9',
-          200: '#ccdfd0',
-          300: '#aaccb1',
-          400: '#789e81',
-          500: '#547a5d',
-          600: '#3c593f',
+        forest: {
+          50: '#F3F5F3',
+          100: '#DCE4DD',
+          200: '#B8CDB9',
+          300: '#93B595',
+          400: '#6F9D72',
+          500: '#4B854F',
+          600: '#3C6B3F',
+          700: '#2D512F',
+          800: '#1F3720',
+          900: '#111D11',
         }
       },
       fontFamily: {
@@ -48,8 +61,10 @@ module.exports = {
         'xl': '1rem',
       },
       boxShadow: {
-        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-        'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+        'book': '1px 1px 5px rgba(0, 0, 0, 0.1), 2px 2px 20px rgba(0, 0, 0, 0.1)',
+        'page': 'inset -20px 0 20px -20px rgba(0, 0, 0, 0.3)',
+        'paper': 'inset 0 0 30px rgba(0, 0, 0, 0.1)',
+        'paper-soft': '0 0 15px rgba(0, 0, 0, 0.05)',
       },
       maxWidth: {
         '8xl': '88rem',
@@ -72,12 +87,33 @@ module.exports = {
           '0%': { opacity: '0', transform: 'scale(0.95)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
+        'mascot-blink': {
+          '0%, 96%, 100%': { opacity: '1' },
+          '97%, 99%': { opacity: '0' },
+        },
+        'mascot-blink-reverse': {
+          '0%, 96%, 100%': { opacity: '0' },
+          '97%, 99%': { opacity: '1' },
+        },
+        'page-curl': {
+          '0%': { transform: 'perspective(1500px) rotateY(0deg)' },
+          '100%': { transform: 'perspective(1500px) rotateY(-3deg)' },
+        }
       },
       animation: {
         'fade-in': 'fade-in 1s ease-out forwards',
         'fade-in-delay': 'fade-in-delay 1.5s ease-out forwards',
         'slide-up': 'slide-up 0.8s ease-out forwards',
         'scale-in': 'scale-in 0.6s ease-out forwards',
+        'mascot-blink': 'mascot-blink 4s ease-in-out infinite',
+        'mascot-blink-reverse': 'mascot-blink-reverse 4s ease-in-out infinite',
+        'page-curl': 'page-curl 0.6s ease-out',
+      },
+      backgroundImage: {
+        'paper-texture': "url('/assets/papertexture.png')",
+        'leather-texture': "linear-gradient(to right bottom, rgba(114, 76, 37, 0.8), rgba(65, 43, 21, 0.9))",
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-paper': 'linear-gradient(to right bottom, rgba(255, 253, 247, 0.9), rgba(255, 249, 233, 0.95))',
       },
     },
   },

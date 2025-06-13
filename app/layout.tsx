@@ -1,22 +1,23 @@
-import React from 'react';
-import { Playfair_Display, Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
+import { Playfair_Display, Crimson_Text } from 'next/font/google';
 import './globals.css';
+import Navbar from './components/Navbar';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
-  display: 'swap',
   variable: '--font-playfair',
 });
 
-const inter = Inter({
+const crimson = Crimson_Text({
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
   subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-crimson',
 });
 
 export const metadata = {
-  title: 'Your Inner Library',
-  description: 'A gentle space to think, feel, and write—with AI that listens deeply.',
+  title: 'Your Inner Library - A Mindful Journaling Experience',
+  description: 'A beautiful space for your daily reflections, emotions, and personal growth.',
 };
 
 export default function RootLayout({
@@ -25,8 +26,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="font-sans">{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className={`${playfair.variable} ${crimson.variable}`}>
+        <body suppressHydrationWarning className="antialiased">
+          <Navbar />
+          <main className="pt-16">
+            {children}
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 } 

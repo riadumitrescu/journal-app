@@ -1,0 +1,94 @@
+{
+  "morning": [
+    {
+      "id": "morning-1",
+      "text": "What's one small thing you're looking forward to today?",
+      "tags": ["gratitude", "anticipation"],
+      "voice": "gentle",
+      "repeatInterval": 7
+    },
+    {
+      "id": "morning-2",
+      "text": "How did you sleep? What's your energy level like this morning?",
+      "tags": ["reflection", "wellness"],
+      "voice": "caring",
+      "repeatInterval": 3
+    },
+    {
+      "id": "morning-3",
+      "text": "What would make today feel like a good day?",
+      "tags": ["intention", "planning"],
+      "voice": "encouraging",
+      "repeatInterval": 5
+    }
+  ],
+  "afternoon": [
+    {
+      "id": "afternoon-1",
+      "text": "What's been the highlight of your day so far?",
+      "tags": ["reflection", "gratitude"],
+      "voice": "curious",
+      "repeatInterval": 4
+    },
+    {
+      "id": "afternoon-2",
+      "text": "How is your energy flowing? What do you need right now?",
+      "tags": ["self-care", "awareness"],
+      "voice": "nurturing",
+      "repeatInterval": 3
+    },
+    {
+      "id": "afternoon-3",
+      "text": "What's one small win you've had today?",
+      "tags": ["achievement", "gratitude"],
+      "voice": "supportive",
+      "repeatInterval": 5
+    }
+  ],
+  "evening": [
+    {
+      "id": "evening-1",
+      "text": "What brought you peace today?",
+      "tags": ["reflection", "peace"],
+      "voice": "calming",
+      "repeatInterval": 4
+    },
+    {
+      "id": "evening-2",
+      "text": "What's one thing you'd like to remember about today?",
+      "tags": ["memory", "gratitude"],
+      "voice": "reflective",
+      "repeatInterval": 6
+    },
+    {
+      "id": "evening-3",
+      "text": "How did you take care of yourself today?",
+      "tags": ["self-care", "reflection"],
+      "voice": "gentle",
+      "repeatInterval": 5
+    }
+  ],
+  "late_night": [
+    {
+      "id": "late-night-1",
+      "text": "What's on your mind as the day winds down?",
+      "tags": ["reflection", "peace"],
+      "voice": "soothing",
+      "repeatInterval": 4
+    },
+    {
+      "id": "late-night-2",
+      "text": "What would you like to let go of before sleep?",
+      "tags": ["release", "peace"],
+      "voice": "gentle",
+      "repeatInterval": 5
+    },
+    {
+      "id": "late-night-3",
+      "text": "What's one thing you're grateful for right now?",
+      "tags": ["gratitude", "peace"],
+      "voice": "calming",
+      "repeatInterval": 6
+    }
+  ]
+} 

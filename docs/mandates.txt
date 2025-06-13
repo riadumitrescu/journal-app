@@ -1,0 +1,24 @@
+# Project Mandates
+
+## Core Technology Requirements
+- Clerk MUST be used for authentication
+- Supabase MUST be used for backend database and storage
+- Vercel is the ONLY deployment target
+
+## Design Requirements
+- Typography MUST use:
+  - EB Garamond for primary text
+  - Karla/Inter for UI elements
+- Visual aesthetic MUST maintain:
+  - Cream background
+  - Brown accents
+  - Soft/cozy feel
+  - Clean, minimal interface
+
+## Development Process
+- All changes MUST be documented in roadmap.txt
+- Previous versions MUST be preserved unless explicitly told to delete
+- Critical benchmarks MUST NOT be overwritten
+- New versions MUST be created for significant changes (v2, v3, etc.)
+
+Last Updated: 2024-03-21 

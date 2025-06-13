@@ -1,139 +1,192 @@
-'use client';
-
-import React from 'react';
-import Link from 'next/link';
-
-const StepCard = ({ number, title, description }: { number: string; title: string; description: string }) => (
-  <div className="flex gap-6 items-start p-8 rounded-xl bg-sage-50/80 shadow-soft border border-sage-200/50">
-    <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-forest-500 text-cream-50 font-serif text-xl shadow-soft">
-      {number}
-    </div>
-    <div>
-      <h3 className="font-serif text-xl mb-2 text-forest-600">{title}</h3>
-      <p className="text-brown-400 leading-relaxed">{description}</p>
-    </div>
-  </div>
-);
-
-const FeatureCard = ({ title, description }: { title: string; description: string }) => (
-  <div className="p-8 rounded-xl bg-cream-50/80 shadow-soft border border-sage-100 
-                  hover:border-sage-200 transition-all duration-300 hover:shadow-lg">
-    <h3 className="font-serif text-xl mb-3 text-forest-600">{title}</h3>
-    <p className="text-brown-400 leading-relaxed">{description}</p>
-  </div>
-);
+import FeatherMascot from "./components/FeatherMascot";
+import FeatureCard from "./components/FeatureCard";
+import MoodCalendar from "./components/MoodCalendar";
+import { SignUpButton } from "@clerk/nextjs";
+import AuthenticatedContent from "./components/AuthenticatedContent";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cream-50 via-sage-50 to-cream-100">
+    <div className="min-h-screen bg-leather-800 bg-leather-texture">
       {/* Hero Section */}
-      <section className="px-6 pt-24 pb-32 max-w-4xl mx-auto">
-        <div className="text-center space-y-8">
-          <h1 className="text-5xl md:text-6xl font-serif tracking-wide text-forest-600">
-            Your Inner Library
-          </h1>
-          <p className="text-xl md:text-2xl text-sage-500 font-light">
-            A gentle space to think, feel, and write—with AI that listens deeply.
-          </p>
-          <p className="text-lg text-brown-400 max-w-2xl mx-auto">
-            Not just a journaling app. A private world where your thoughts become stories, 
-            your stories become patterns, and those patterns become self-discovery.
-          </p>
-          <div className="pt-10">
-            <Link
-              href="/auth"
-              className="inline-block px-8 py-3.5 bg-forest-500 text-cream-50 rounded-xl
-                       font-serif text-lg shadow-soft
-                       transition-all duration-300 ease-in-out
-                       hover:shadow-lg hover:bg-forest-600 hover:scale-[1.02]
-                       focus:outline-none focus:ring-2 focus:ring-forest-400 focus:ring-opacity-50"
-            >
-              Begin Your Story
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* How it Works Section */}
-      <section className="px-6 py-24 bg-gradient-to-b from-sage-100/30 to-sage-50/30">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-serif text-center mb-16 text-forest-600">How it Works</h2>
-          <div className="space-y-8">
-            <StepCard 
-              number="1"
-              title="Get Prompted" 
-              description="Receive thoughtful prompts tailored to your journey and mood."
-            />
-            <StepCard 
-              number="2"
-              title="Journal" 
-              description="Write freely in a beautiful, distraction-free space."
-            />
-            <StepCard 
-              number="3"
-              title="Grow Your Library" 
-              description="Watch your collection of thoughts and insights expand over time."
-            />
+      <section className="min-h-screen flex items-center justify-center px-4 py-20 relative bg-[url('/background_books.png')] bg-repeat">
+        <div className="absolute inset-0 bg-[#2C1D0E]/80 backdrop-blur-[2px]"></div>
+        <div className="relative max-w-4xl mx-auto">
+          {/* Paper-like card */}
+          <div className="bg-gradient-paper rounded-2xl p-12 text-center shadow-xl relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('/assets/papertexture.png')] bg-repeat opacity-60"></div>
+            <div className="absolute inset-0 bg-[url('/assets/papertexture.png')] bg-repeat opacity-40 rotate-180"></div>
+            <div className="relative">
+              <div className="mb-8">
+                <FeatherMascot className="mx-auto" size={180} />
+              </div>
+              <h1 className="text-6xl font-serif text-[#2C1D0E] mb-6">Your thoughts. Beautifully kept.</h1>
+              <p className="text-2xl text-forest-600 mb-12 font-crimson italic">
+                A minimalist journaling experience that lets you track your mood, capture your days, and reflect visually.
+              </p>
+              <AuthenticatedContent className="flex gap-4 justify-center" />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="px-6 py-24 bg-gradient-to-b from-cream-50/50 to-sage-50/30">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-serif text-center mb-16 text-forest-600">Features</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <FeatureCard 
-              title="Visual Storytelling" 
-              description="See your entries come to life with beautiful visualizations and patterns."
+      <section id="features" className="py-20 px-4 bg-[#2C1D0E] relative">
+        <div className="max-w-6xl mx-auto relative">
+          <h2 className="text-4xl font-serif text-white text-center mb-16">What makes us different</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <FeatureCard
+              icon="✍️"
+              title="Write daily entries"
+              description="Capture your thoughts in a clean, distraction-free environment designed for mindful reflection."
             />
-            <FeatureCard 
-              title="AI That Listens" 
-              description="Experience companionship that understands and responds thoughtfully."
+            <FeatureCard
+              icon="🎨"
+              title="Pick a color for your mood"
+              description="Express your feelings through a beautiful color palette, creating a visual journey of your emotional landscape."
             />
-            <FeatureCard 
-              title="Mood & Value Tracking" 
-              description="Discover patterns in your emotional journey and personal growth."
+            <FeatureCard
+              icon="📊"
+              title="See your year in colors"
+              description="Watch your emotional journey unfold through elegant visualizations and meaningful patterns."
             />
-            <FeatureCard 
-              title="Full Privacy" 
-              description="Your thoughts are yours alone. Bank-level encryption keeps them safe."
-            />
-            <FeatureCard 
-              title="Designed for Presence" 
-              description="A space for being, not doing. No pressure, no productivity metrics."
+            <FeatureCard
+              icon="🔒"
+              title="Simple. Private. Meaningful."
+              description="Your thoughts are yours alone. We ensure your journal stays private and secure."
             />
           </div>
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="px-6 py-24 bg-gradient-to-b from-sage-100/30 to-sage-50/30">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-serif mb-8 text-forest-600">
-            You don't need to explain yourself. Just start.
-          </h2>
-          <Link
-            href="/auth"
-            className="inline-block px-8 py-3.5 bg-forest-500 text-cream-50 rounded-xl
-                     font-serif text-lg shadow-soft
-                     transition-all duration-300 ease-in-out
-                     hover:shadow-lg hover:bg-forest-600 hover:scale-[1.02]
-                     focus:outline-none focus:ring-2 focus:ring-forest-400 focus:ring-opacity-50"
-          >
-            Begin Your Story
-          </Link>
+      {/* Mood Calendar Preview */}
+      <section className="py-20 px-4 relative bg-[#2C1D0E]">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-serif text-white mb-6">Your year in colors</h2>
+          <p className="text-xl text-cream-100/90 mb-12 font-crimson">
+            Watch your emotional journey unfold through a beautiful visualization
+          </p>
+          <div className="bg-[#F5F0E5] rounded-2xl p-8 shadow-xl">
+            <div className="flex flex-wrap gap-1 max-w-4xl mx-auto justify-center">
+              {[
+                // Spring awakening - peace with moments of joy
+                ...Array(20).fill('#8BAF7A'),  // Peace - sage with gray undertone
+                ...Array(3).fill('#E6B34D'),   // Joy - warm honey
+                ...Array(10).fill('#8BAF7A'),  // Peace
+                ...Array(2).fill('#E6B34D'),   // Joy moments
+                
+                // Early summer - focus and growth period
+                ...Array(15).fill('#7AA0C6'),  // Focus - dusty blue
+                ...Array(5).fill('#8BAF7A'),   // Peaceful moments
+                ...Array(20).fill('#9B8AC0'),  // Growth - muted purple
+                ...Array(3).fill('#7AA0C6'),   // Focus moments
+                
+                // Mid summer - joy and love flourish
+                ...Array(15).fill('#E6B34D'),  // Joy
+                ...Array(10).fill('#D68C7B'),  // Love - terracotta rose
+                ...Array(5).fill('#E6B34D'),   // Joy
+                ...Array(8).fill('#D68C7B'),   // Love
+                
+                // Late summer - growth and focus
+                ...Array(15).fill('#9B8AC0'),  // Growth
+                ...Array(10).fill('#7AA0C6'),  // Focus
+                ...Array(3).fill('#9B8AC0'),   // Growth moments
+                
+                // Autumn - peace returns with moments of joy
+                ...Array(20).fill('#8BAF7A'),  // Peace
+                ...Array(4).fill('#E6B34D'),   // Joy moments
+                ...Array(12).fill('#8BAF7A'),  // Peace
+                
+                // Winter - contemplative mix
+                ...Array(10).fill('#7AA0C6'),  // Focus
+                ...Array(8).fill('#9B8AC0'),   // Growth
+                ...Array(5).fill('#D68C7B'),   // Love
+                ...Array(12).fill('#8BAF7A'),  // Peace
+                
+                ...Array(135).fill('white')    // Empty squares
+              ].map((color, i) => (
+                <div 
+                  key={i} 
+                  className={`w-4 h-4 rounded-sm ${
+                    color === 'white' 
+                      ? 'bg-[#4A3F35]/5' 
+                      : ''
+                  }`}
+                  style={{
+                    backgroundColor: color !== 'white' ? color : undefined,
+                    opacity: color !== 'white' ? 0.95 : undefined
+                  }}
+                ></div>
+              ))}
+            </div>
+            <div className="mt-8 flex items-center justify-center gap-8 text-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#E6B34D' }}></div>
+                <span className="text-[#2C1D0E]">Joy</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#8BAF7A' }}></div>
+                <span className="text-[#2C1D0E]">Peace</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#7AA0C6' }}></div>
+                <span className="text-[#2C1D0E]">Focus</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#9B8AC0' }}></div>
+                <span className="text-[#2C1D0E]">Growth</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#D68C7B' }}></div>
+                <span className="text-[#2C1D0E]">Love</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Design Philosophy */}
+      <section id="design" className="py-20 px-4 bg-forest-900/30 backdrop-blur-sm relative">
+        <div className="absolute inset-0 bg-[url('/assets/papertexture.png')] bg-repeat opacity-10"></div>
+        <div className="max-w-4xl mx-auto relative">
+          <div className="bg-gradient-paper rounded-lg shadow-book p-12 hover:animate-page-curl overflow-hidden relative">
+            <div className="absolute inset-0 bg-[url('/assets/papertexture.png')] bg-repeat opacity-60"></div>
+            <div className="absolute inset-0 bg-[url('/assets/papertexture.png')] bg-repeat opacity-40 rotate-180"></div>
+            <div className="relative text-center">
+              <div className="mb-8">
+                <FeatherMascot className="mx-auto" size={120} />
+              </div>
+              <h2 className="text-4xl font-serif text-forest-800 mb-6">Crafted with intention</h2>
+              <p className="text-xl text-forest-600 mb-8 font-crimson">
+                Inspired by the timeless elegance of paper journals, we've created a digital space that feels 
+                both familiar and magical. Every detail — from the soft paper textures to the carefully chosen 
+                serif fonts — is designed to make your writing experience peaceful and meaningful.
+              </p>
+              <blockquote className="text-2xl font-serif text-forest-700 italic mb-12 px-8 py-6 border-l-4 border-forest-200 bg-cream-100/50">
+                "This journal feels like a real object I come back to."
+              </blockquote>
+              <div className="flex flex-col gap-4 items-center">
+                <p className="text-xl text-forest-600 font-crimson mb-4">
+                  Ready to begin your reflection journey?
+                </p>
+                <SignUpButton mode="modal">
+                  <button className="bg-forest-700 text-cream-50 px-12 py-4 rounded-lg hover:bg-forest-600 transition-colors font-medium text-lg border border-forest-900/10 shadow-lg hover:shadow-xl">
+                    Start Now
+                  </button>
+                </SignUpButton>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-8 text-center text-sage-400 border-t border-sage-200">
-        <nav className="space-x-8 text-sm">
-          <a href="#" className="hover:text-forest-500 transition-colors">About</a>
-          <a href="#" className="hover:text-forest-500 transition-colors">Privacy</a>
-          <a href="#" className="hover:text-forest-500 transition-colors">Contact</a>
-          <a href="#" className="hover:text-forest-500 transition-colors">Terms</a>
-        </nav>
+      <footer className="py-8 px-4 bg-leather-900 relative">
+        <div className="absolute inset-0 bg-[url('/assets/papertexture.png')] bg-repeat opacity-5"></div>
+        <div className="max-w-4xl mx-auto text-center relative">
+          <p className="text-cream-200/60 font-crimson">
+            © 2025 Your Inner Library. A space for mindful reflection.
+          </p>
+        </div>
       </footer>
     </div>
   );
