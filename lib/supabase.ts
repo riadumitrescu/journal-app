@@ -18,4 +18,14 @@ export type Entry = {
   updated_at?: string;
   title?: string;
   album_id?: string | null;
+};
+
+export type Album = {
+  id: string;
+  user_id: string;
+  title: string;
+  description?: string;
+  color: string;
+  created_at: string;
+  updated_at: string;
 }; 
