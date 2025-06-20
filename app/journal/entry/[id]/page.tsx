@@ -6,23 +6,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { useUser } from '@clerk/nextjs';
-import { createClient } from '@supabase/supabase-js';
-
-const SUPABASE_URL = 'https://tlisradyhpaqlzxbblhm.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsaXNyYWR5aHBhcWx6eGJibGhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg3MDE1MTcsImV4cCI6MjA2NDI3NzUxN30._zKeuPATi2W-AlEpi8VP_1ExgeSf2YSDwa0bxje5yH4';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-interface Entry {
-  id: string;
-  created_at: string;
-  content: string;
-  mood: string;
-  mood_color: string;
-  summary?: string;
-  tags?: string[];
-  ai_insight?: string | null;
-}
+import { supabase, type Entry } from '@/lib/supabase';
+import { ArrowLeft, BookBookmark } from '@phosphor-icons/react';
+import AddToAlbumModal from '@/app/components/AddToAlbumModal';
 
 export default function EntryPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -31,6 +17,7 @@ export default function EntryPage({ params }: { params: { id: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [isAddToAlbumModalOpen, setIsAddToAlbumModalOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -109,25 +96,27 @@ export default function EntryPage({ params }: { params: { id: string } }) {
   return (
     <div className="min-h-screen bg-[#2C1D0E] pt-20 pb-12">
       <div className="max-w-4xl mx-auto px-4">
-        {/* Back Button */}
-        <Link
-          href="/journal"
-          className="inline-flex items-center text-cream-50 mb-6 hover:text-cream-100 transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-2"
-            viewBox="0 0 20 20"
-            fill="currentColor"
+        {/* Navigation and Actions */}
+        <div className="flex justify-between items-center mb-6">
+          <Link
+            href="/journal"
+            className="inline-flex items-center text-cream-50 hover:text-cream-100 transition-colors"
           >
-            <path
-              fillRule="evenodd"
-              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-          Back to Journal
-        </Link>
+            <ArrowLeft size={20} weight="bold" className="mr-2" />
+            Back to Journal
+          </Link>
+
+          <button
+            onClick={() => setIsAddToAlbumModalOpen(true)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg
+                     bg-[#F5F0E5] text-[#2C1D0E] hover:bg-[#E6D5C1]
+                     transition-all duration-300 shadow-lg hover:shadow-xl
+                     border border-[#2C1D0E]/10"
+          >
+            <BookBookmark size={20} weight="bold" />
+            Add to Album
+          </button>
+        </div>
 
         {/* Main Content */}
         <div 
@@ -215,6 +204,15 @@ export default function EntryPage({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
+
+      {/* Add to Album Modal */}
+      {entry && (
+        <AddToAlbumModal
+          isOpen={isAddToAlbumModalOpen}
+          onClose={() => setIsAddToAlbumModalOpen(false)}
+          entry={entry}
+        />
+      )}
     </div>
   );
 } 

@@ -1,155 +1,156 @@
-# Your Inner Library - Digital Journal
+# Your Inner Library - A Mindful Journaling Experience
 
-A thoughtfully designed digital journaling experience that provides a peaceful space for self-reflection and personal growth.
-
-## Tech Stack
-
-### Frontend
-- **Framework**: Next.js (Latest version)
-- **Authentication**: [Clerk](https://clerk.dev/) - For secure, feature-rich authentication
-- **Styling**: Tailwind CSS with custom design system
-- **Typography**:
-  - Primary: EB Garamond - For elegant, readable body text
-  - Secondary: Inter/Karla - For UI elements and supporting text
-
-### Backend
-- **Database & Storage**: [Supabase](https://supabase.com/)
-  - PostgreSQL database for structured data
-  - Storage for media files and attachments
-  - Real-time capabilities when needed
-
-### Deployment
-- **Platform**: Vercel
-  - Optimized for Next.js deployment
-  - Automatic CI/CD pipeline
-  - Edge network for optimal performance
-
-## Design System
-
-### Colors
-- Primary background: Cream (#F5E6D3)
-- Text and UI elements: Rich Brown (#2A2118)
-- Accent elements: Soft, muted earth tones
-
-### Visual Language
-- **Aesthetic**: Warm, cozy, and inviting
-- **Interface**: Minimalist and intentional
-- **Interactions**: Smooth, gentle animations
-- **Spacing**: Generous whitespace for readability
-- **Shadows**: Soft, subtle depth
-
-### Typography Scale
-- Headings: EB Garamond
-- Body: EB Garamond
-- UI Elements: Inter/Karla
-- Recommended font sizes and weights will be maintained for optimal readability
-
-## Development Guidelines
-
-1. All new features must maintain the established aesthetic
-2. Performance is a key consideration - optimize assets and interactions
-3. Accessibility must be considered in all design decisions
-4. Mobile-first, responsive design approach
-
-## Project Structure
-
-```
-journal-app/
-├── app/                  # Next.js app directory
-├── components/           # Reusable UI components
-├── lib/                  # Utility functions and helpers
-├── public/              # Static assets
-└── styles/              # Global styles and design tokens
-```
-
-## Getting Started
-
-[Development setup instructions will be added as the project progresses]
-
-## Design Principles
-
-1. **Intentional**: Every element serves a purpose
-2. **Intuitive**: Clear user flows and natural interactions
-3. **Minimal**: Remove unnecessary complexity
-4. **Delightful**: Small details that enhance the experience
-
-## Notes
-
-- This document serves as the primary reference for project decisions
-- Any deviations from these specifications require explicit approval
-- The tech stack and core tools (Clerk, Supabase) are locked unless explicitly changed
-
-## Required Assets
-
-Please add the following assets to make the app work correctly:
-
-1. `/public/assets/paper-texture.png` - A subtle paper texture for the journal background. This should be a seamless, repeating texture that gives a natural paper feel to the journal entries.
+A beautiful space for your daily reflections, emotions, and personal growth.
 
 ## Features
 
-- 📝 Personal journal entries
-- 🔐 Secure authentication with Clerk
-- 🎨 Beautiful, responsive design
-- 📚 Library-themed interface
-- 🌟 Modern user experience
+- 📝 Daily journal entries with rich text editing
+- 🎨 Mood tracking with color visualization
+- 📚 Custom albums to organize your entries
+- 📊 Visual year-in-review of your journaling journey
+- 🔒 Secure authentication and private entries
+
+## Tech Stack
+
+- Next.js 14 (App Router)
+- Supabase (Database & Storage)
+- Clerk (Authentication)
+- TailwindCSS (Styling)
+- TypeScript
+- Vercel (Deployment)
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
-- Git
+- Node.js 18+ and npm
+- Supabase account and project
+- Clerk account and project
 
-### Installation
+### Environment Variables
+
+The following environment variables are required for deployment:
+
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+
+# Clerk URLs
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/journal
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/journal
+```
+
+### Local Development
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/[your-username]/journal-app.git
+   git clone https://github.com/your-username/journal-app.git
 cd journal-app
 ```
 
 2. Install dependencies:
 ```bash
 npm install
-# or
-yarn install
 ```
 
-3. Create a `.env.local` file in the root directory and add your Clerk credentials:
-```
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key_here
-CLERK_SECRET_KEY=your_secret_key_here
-
-# Clerk sign in/up URLs
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
-```
+3. Create a `.env.local` file with the environment variables listed above.
 
 4. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-```
+   ```
 
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Database Setup
+
+1. Create a new Supabase project
+2. Run the following migration in the SQL editor:
+
+```sql
+-- Create albums table
+CREATE TABLE IF NOT EXISTS albums (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id TEXT NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  description TEXT,
+  color TEXT DEFAULT '#8B5E3C',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Create album_entries junction table
+CREATE TABLE IF NOT EXISTS album_entries (
+  album_id UUID REFERENCES albums(id) ON DELETE CASCADE,
+  entry_id UUID REFERENCES entries(id) ON DELETE CASCADE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  PRIMARY KEY (album_id, entry_id)
+);
+
+-- Add RLS policies
+ALTER TABLE albums ENABLE ROW LEVEL SECURITY;
+ALTER TABLE album_entries ENABLE ROW LEVEL SECURITY;
+
+-- Albums policies
+CREATE POLICY "Users can view their own albums"
+  ON albums FOR SELECT
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can create their own albums"
+  ON albums FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update their own albums"
+  ON albums FOR UPDATE
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete their own albums"
+  ON albums FOR DELETE
+  USING (auth.uid() = user_id);
+
+-- Album entries policies
+CREATE POLICY "Users can view their album entries"
+  ON album_entries FOR SELECT
+  USING (
+    EXISTS (
+      SELECT 1 FROM albums
+      WHERE albums.id = album_entries.album_id
+      AND albums.user_id = auth.uid()
+    )
+  );
+
+CREATE POLICY "Users can add entries to their albums"
+  ON album_entries FOR INSERT
+  WITH CHECK (
+    EXISTS (
+      SELECT 1 FROM albums
+      WHERE albums.id = album_entries.album_id
+      AND albums.user_id = auth.uid()
+    )
+  );
+
+CREATE POLICY "Users can remove entries from their albums"
+  ON album_entries FOR DELETE
+  USING (
+    EXISTS (
+      SELECT 1 FROM albums
+      WHERE albums.id = album_entries.album_id
+      AND albums.user_id = auth.uid()
+    )
+  );
+```
 
 ## Deployment
 
-This project is configured for easy deployment on Vercel:
-
 1. Push your code to GitHub
-2. Import your repository to Vercel
-3. Add your environment variables in the Vercel dashboard:
-   - Add all Clerk environment variables from your `.env.local` file
+2. Connect your repository to Vercel
+3. Add all environment variables in the Vercel project settings
 4. Deploy!
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 

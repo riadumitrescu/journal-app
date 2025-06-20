@@ -83,16 +83,30 @@ function ModalContent({ isOpen, onClose, onAlbumCreated }: CreateAlbumModalProps
     setError(null);
 
     try {
-      const { error: supabaseError } = await supabase
+      console.log('Creating album with:', {
+        user_id: user.id,
+        title,
+        description,
+        color
+      });
+
+      const { data, error: supabaseError } = await supabase
         .from('albums')
         .insert([{
           user_id: user.id,
           title,
           description,
           color
-        }]);
+        }])
+        .select()
+        .single();
 
-      if (supabaseError) throw supabaseError;
+      if (supabaseError) {
+        console.error('Supabase error details:', supabaseError);
+        throw supabaseError;
+      }
+
+      console.log('Successfully created album:', data);
       setTitle('');
       setDescription('');
       setHue(30);
@@ -101,7 +115,7 @@ function ModalContent({ isOpen, onClose, onAlbumCreated }: CreateAlbumModalProps
       onClose();
     } catch (err) {
       console.error('Error creating album:', err);
-      setError('Failed to create album. Please try again.');
+      setError(err instanceof Error ? err.message : 'Failed to create album. Please try again.');
     } finally {
       setIsSubmitting(false);
     }

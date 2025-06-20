@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import { format, startOfYear, eachDayOfInterval, endOfYear } from 'date-fns';
 import {
   useFloating,
@@ -14,18 +13,7 @@ import {
   FloatingPortal,
   arrow
 } from '@floating-ui/react';
-
-const SUPABASE_URL = 'https://tlisradyhpaqlzxbblhm.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsaXNyYWR5aHBhcWx6eGJibGhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg3MDE1MTcsImV4cCI6MjA2NDI3NzUxN30._zKeuPATi2W-AlEpi8VP_1ExgeSf2YSDwa0bxje5yH4';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-interface Entry {
-  created_at: string;
-  mood_color: string;
-  mood: string;
-  content: string;
-}
+import { supabase, type Entry } from '@/lib/supabase';
 
 interface DayEntries {
   entries: Entry[];
@@ -155,7 +143,7 @@ export default function MoodTracker() {
 
         const { data, error } = await supabase
           .from('entries')
-          .select('created_at, mood_color, mood, content')
+          .select('id, user_id, created_at, mood_color, mood, content, summary, tags, ai_insight')
           .eq('user_id', user.id)
           .gte('created_at', yearStart.toISOString())
           .lte('created_at', yearEnd.toISOString())
@@ -169,7 +157,7 @@ export default function MoodTracker() {
           if (!acc[date]) {
             acc[date] = { entries: [], latestColor: entry.mood_color };
           }
-          acc[date].entries.push(entry);
+          acc[date].entries.push(entry as Entry);
           acc[date].latestColor = entry.mood_color; // Latest color will be the last one
           return acc;
         }, {});

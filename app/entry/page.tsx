@@ -2,13 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@supabase/supabase-js';
 import { useUser } from '@clerk/nextjs';
-
-const SUPABASE_URL = 'https://tlisradyhpaqlzxbblhm.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsaXNyYWR5aHBhcWx6eGJibGhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg3MDE1MTcsImV4cCI6MjA2NDI3NzUxN30._zKeuPATi2W-AlEpi8VP_1ExgeSf2YSDwa0bxje5yH4';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+import { supabase } from '@/lib/supabase';
 
 // Predefined mood names
 const MOODS = ['Joyful', 'Peaceful', 'Melancholic', 'Energetic', 'Contemplative'];
@@ -151,11 +146,18 @@ export default function EntryPage() {
       }
 
       console.log('Successfully saved entry:', data);
-      router.push('/dashboard');
+
+      if (error) {
+        setError('Failed to save entry');
+        setIsLoading(false);
+        return;
+      }
+
+      // Navigate to journal page
+      router.push('/journal');
     } catch (err) {
       console.error('Save error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to save entry. Please try again.');
-    } finally {
+      setError(err instanceof Error ? err.message : 'Failed to save entry');
       setIsLoading(false);
     }
   };

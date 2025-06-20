@@ -42,6 +42,25 @@
     - Improved paper texture and 3D rotation effects
     - Enhanced color scheme with warm amber lighting
 
+Album Feature Updates (March 22, 2024)
+------------------------------------
+What was changed:
+- Added ability to add entries to albums from entry view and recent entries list
+- Created AddToAlbumModal component for managing entry-album relationships
+- Updated Entry type to include all fields from the database
+- Fixed Supabase client initialization to use centralized client
+
+Why it was changed:
+- To allow users to organize their entries into albums after creation
+- To provide a consistent way to manage album entries across the app
+- To improve code maintainability and type safety
+
+What part of the app it affects:
+- Entry view page
+- Recent entries component
+- Album management functionality
+- Supabase client initialization and types
+
 ### Tech Decisions Locked:
 1. Authentication: Clerk
 2. Backend: Supabase (Database & Storage)
