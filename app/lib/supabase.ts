@@ -3,8 +3,6 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
 export type Entry = {
   id: string;
   user_id: string;
@@ -18,4 +16,16 @@ export type Entry = {
   updated_at?: string;
   title?: string;
   album_id?: string | null;
-}; 
+};
+
+type Database = {
+  public: {
+    Tables: {
+      entries: {
+        Row: Entry;
+      };
+    };
+  };
+};
+
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey); 

@@ -6,7 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { useUser } from '@clerk/nextjs';
-import { supabase, type Entry } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
+import type { Entry, Database } from '@/lib/supabase';
 import { ArrowLeft, BookBookmark } from '@phosphor-icons/react';
 import AddToAlbumModal from '@/app/components/AddToAlbumModal';
 
@@ -180,7 +181,7 @@ export default function EntryPage({ params }: { params: { id: string } }) {
               <div className="mb-8">
                 <h3 className="text-leather-600 mb-3 font-['Crimson_Text']">Tags</h3>
                 <div className="flex flex-wrap gap-2">
-                  {entry.tags.map((tag, index) => (
+                  {entry.tags.map((tag: string, index: number) => (
                     <span
                       key={index}
                       className="px-3 py-1 rounded-full bg-forest-50 text-forest-700 text-sm border border-forest-100"

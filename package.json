@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.0.0-beta.35",
+    "@clerk/nextjs": "^6.22.0",
     "@floating-ui/react": "^0.27.10",
     "@phosphor-icons/react": "^2.1.10",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
