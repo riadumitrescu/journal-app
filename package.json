@@ -12,24 +12,23 @@
     "@clerk/nextjs": "^6.22.0",
     "@floating-ui/react": "^0.27.10",
     "@phosphor-icons/react": "^2.1.10",
-    "@supabase/auth-helpers-nextjs": "^0.10.0",
-    "@supabase/ssr": "^0.6.1",
-    "@supabase/supabase-js": "^2.49.9",
+    "@supabase/ssr": "^0.1.0",
+    "@supabase/supabase-js": "^2.39.0",
     "@tanstack/react-query": "^5.80.5",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.16.0",
     "next": "14.2.25",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "svix": "^1.67.0",
-    "tailwindcss": "^3.4.1",
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.33"
+    "svix": "^1.67.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }
 }
