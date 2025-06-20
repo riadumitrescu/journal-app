@@ -2,7 +2,12 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: ['tlisradyhpaqlzxbblhm.supabase.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'tlisradyhpaqlzxbblhm.supabase.co',
+      },
+    ],
   },
 }
 
